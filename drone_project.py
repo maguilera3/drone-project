@@ -27,20 +27,22 @@ def command(command='command'):
             time.sleep(5)
     else:
         sock.sendto(command.encode(encoding="utf-8") , tello_address)
+        if command=='streamon':
+            threading.Thread(target=video).start()
 
-def video(command):
+def video():
     global video_socket
+    global server_socket
     while True:
         msg, ip = video_socket.recvfrom(2048)
         server_socket.sendto(msg,('192.168.1.101',9999))
+        
 class Control(Resource):
     def post(self):
         command_data = request.form['command']
         if not command_data=='land':
             threading.Thread(target=command,args=(command_data,)).start()
             threading.Thread(target=command).start()
-        if command_data=='streamon':
-           threading.Thread(target=command,args=(command_data,)).start()
         else:
             threading.Thread(target=command,args=('land',)).start()
     
