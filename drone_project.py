@@ -45,6 +45,7 @@ class Control(Resource):
             threading.Thread(target=command).start()
         else:
             threading.Thread(target=command,args=('land',)).start()
+	return 'ok'
     
 api.add_resource(Control, '/control')
 
