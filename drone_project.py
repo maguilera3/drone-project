@@ -1,15 +1,15 @@
 from flask import Flask, request
 from flask_restful import Resource, Api
 import socket
-import threading 
+import threading
 import time
 
 app = Flask(__name__)
 api = Api(app)
 
 host = ''
-port = 9000
-locaddr = (host,port) 
+port = 9001
+locaddr = (host,port)
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 tello_ip = '192.168.10.1'
 tello_address = (tello_ip, 8889)
@@ -31,12 +31,14 @@ def command(command='command'):
             threading.Thread(target=video).start()
 
 def video():
+    """
     global video_socket
     global server_socket
     while True:
         msg, ip = video_socket.recvfrom(2048)
-        server_socket.sendto(msg,('192.168.1.101',9999))
-        
+        server_socket.sendto(msg,('190.170.126.6',9999))
+    """
+
 class Control(Resource):
     def post(self):
         command_data = request.form['command']
@@ -45,8 +47,7 @@ class Control(Resource):
             threading.Thread(target=command).start()
         else:
             threading.Thread(target=command,args=('land',)).start()
-	return 'ok'
-    
+
 api.add_resource(Control, '/control')
 
 if __name__=='__main__':
