@@ -17,7 +17,7 @@ sock.bind(locaddr)
 
 video_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-video_socket.bind(('0.0.0.0', 11111))
+#video_socket.bind(('0.0.0.0', 11111))
 
 def command(command='command'):
     global sock
@@ -27,8 +27,10 @@ def command(command='command'):
             time.sleep(5)
     else:
         sock.sendto(command.encode(encoding="utf-8") , tello_address)
+        """
         if command=='streamon':
             threading.Thread(target=video).start()
+            """
 
 def video():
     """
@@ -37,8 +39,7 @@ def video():
     while True:
         msg, ip = video_socket.recvfrom(2048)
         server_socket.sendto(msg,('190.170.126.6',9999))
-    """
-
+"""
 class Control(Resource):
     def post(self):
         command_data = request.form['command']
@@ -51,4 +52,4 @@ class Control(Resource):
 api.add_resource(Control, '/control')
 
 if __name__=='__main__':
-    app.run(host='0.0.0.0')
+    app.run()
