@@ -40,16 +40,18 @@ def video():
         msg, ip = video_socket.recvfrom(2048)
         server_socket.sendto(msg,('190.170.126.6',9999))
 """
+
 class Control(Resource):
-    def post(self):
-        command_data = request.form['command']
+    def get(self):
+        command_data = request.args['command']
         if not command_data=='land':
             threading.Thread(target=command,args=(command_data,)).start()
             threading.Thread(target=command).start()
         else:
             threading.Thread(target=command,args=('land',)).start()
 
+
 api.add_resource(Control, '/control')
 
 if __name__=='__main__':
-    app.run()
+    app.run('0.0.0.0',5000)
