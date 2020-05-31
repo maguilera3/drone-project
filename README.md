@@ -27,3 +27,13 @@ If there's some error please rIf there's some error please report us, right now 
 ├── wsgi.py
 
 ```
+
+## Runing Project
+
+### Installing Dependecies
+
+* pip install -r requirements.txt
+
+### Running Project
+
+* python wsgi.py
