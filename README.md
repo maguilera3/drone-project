@@ -6,7 +6,7 @@ The following project was made in a elective in university called "Multimedia Sy
 * [Victor Mendoza](https://gitlab.com/Kinozuko)
 * [Wilsen Hernandez](https://gitlab.com/wilsenhc)
 
-*right now we don't have any materials so we can't check this project anymore*
+**right now we don't have any materials so we can't check this project anymore**
 
 If there's some error please report us. Feel free to question us or use this a base for your project.
 
